@@ -42,7 +42,7 @@ Due to the given time I was not able to do everything I wanted to do.
  * service: Service classes which are called for web request handling
  * util: Includes helper classes for .csf file and date time handling
 
-*src/main/scala*: Includes test classes and resources (.csv files) 
+*src/main/scala*: Includes test classes (JUnit)
 
 ---------------------------
 

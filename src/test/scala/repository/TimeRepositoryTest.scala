@@ -2,6 +2,7 @@ package com.ffrank.mobimeo
 package repository
 
 import model.Time
+import util.{AppProperty, CsvHandler}
 
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -18,7 +19,7 @@ class TimeRepositoryTest {
    */
   @Test
   def checkEntities(): Unit = {
-    val times: Set[Time] = TimeRepository.AVAILABLE_TIMES
+    val times: Set[Time] = CsvHandler.constructTimes(AppProperty.RESOURCES_PATH.concat("/times.csv"))
 
     assertTrue(times.nonEmpty)
 
