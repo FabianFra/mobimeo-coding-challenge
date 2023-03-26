@@ -6,6 +6,6 @@ package model
  *
  * @param id Identifier of the object
  * @param name Name of the line
- * @param delay Delay of the line (data can be found in delays.csv)
+ * @param delay Delay of the line in minutes (data can be found in delays.csv)
  */
 final case class Line(id: Long, name: String, delay: Int = 0)
