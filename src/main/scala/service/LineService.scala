@@ -68,7 +68,7 @@ object LineService extends LineJsonProtocol with SprayJsonSupport {
     val stop: Option[Stop] = StopRepository.findById(stopId)
 
     if (stop.isEmpty) {
-      return complete(HttpResponse(StatusCodes.NotFound, entity = s"No vehicle found to given stop(id: $stopId)"))
+      return complete(HttpResponse(StatusCodes.NotFound, entity = s"No stop found for given id $stopId)"))
     }
 
     val times = TimeRepository.findTimesByStop(stop.get)
