@@ -4,6 +4,9 @@ package util
 import model.{Line, Stop, Time}
 import repository.{LineRepository, StopRepository}
 
+/**
+ * Class which provides convenience functions to read .csv files and construct objects.
+ */
 object CsvHandler {
 
   def readCsv(csvPath: String, hasHeader: Boolean = true): Iterator[String] = {
@@ -29,6 +32,11 @@ object CsvHandler {
     stopObjects
   }
 
+  /**
+   * Reads times.csv and delays.csv file and maps the data to Line objects.
+   *
+   * @return Set of Line objects
+   */
   def constructTimes(csvPath: String, delimiter: String = ","): Set[Time] = {
     val lines = CsvHandler.readCsv(csvPath)
 
@@ -49,7 +57,7 @@ object CsvHandler {
   }
 
   /**
-   * Reads csv file and maps the data to Line objects.
+   * Reads lines.csv and delays.csv file and maps the data to Line objects.
    *
    * @return Set of Line objects
    */
@@ -75,7 +83,7 @@ object CsvHandler {
   }
 
   /**
-   * Reads csv file and returns the data as a map (key=Name of Line as String, value = static delay of Line as Int)
+   * Reads delays.csv file and returns the data as a map (key=Name of Line as String, value = static delay of Line as Int)
    *
    * @return Set of Line objects
    */

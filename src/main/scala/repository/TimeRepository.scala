@@ -6,6 +6,11 @@ import util.{CsvHandler, DateTimeHandler}
 
 import org.joda.time.DateTime
 
+/**
+ * Mocks a repository class for Time objects.
+ *
+ * Included functions are either convenience functions or are mocked db calls.
+ */
 object TimeRepository {
 
   private val TIMES_CSV_PATH = getClass.getResource(".").getPath + "../resources/times.csv"

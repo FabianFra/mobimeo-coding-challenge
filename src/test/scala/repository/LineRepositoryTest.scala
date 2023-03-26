@@ -4,6 +4,9 @@ package repository
 import org.junit.Assert._
 import org.junit.Test
 
+/**
+ * Basic tests for the LineRepository
+ */
 class LineRepositoryTest {
 
   @Test

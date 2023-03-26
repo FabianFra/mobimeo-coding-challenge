@@ -4,6 +4,11 @@ package repository
 import model.Stop
 import util.CsvHandler
 
+/**
+ * Mocks a repository class for Stop objects.
+ *
+ * Included functions are either convenience functions or are mocked db calls.
+ */
 object StopRepository {
 
   private val STOP_CSV_PATH = getClass.getResource(".").getPath + "../resources/stops.csv"

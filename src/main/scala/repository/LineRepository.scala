@@ -1,14 +1,13 @@
 package com.ffrank.mobimeo
 package repository
 
-import model.{Line, Time}
-import util.{CsvHandler, DateTimeHandler}
-
-import org.joda.time.DateTime
+import model.Line
+import util.CsvHandler
 
 /**
- * Object which holds all available lines.
- * Additionally the delays.csv will be read and mapped to the corresponding line objects.
+ * Mocks a repository class for Line objects.
+ *
+ * Included functions are either convenience functions or are mocked db calls.
  */
 object LineRepository {
 
@@ -17,7 +16,6 @@ object LineRepository {
   private val DELAYS_CSV_PATH = getClass.getResource(".").getPath + "../resources/delays.csv"
 
   val AVAILABLE_LINES: Set[Line] = CsvHandler.constructLines(LINE_CSV_PATH, DELAYS_CSV_PATH)
-
 
   def findById(id: Long): Option[Line] = AVAILABLE_LINES.find(_.id == id)
 }

@@ -12,11 +12,17 @@ import akka.http.scaladsl.server.StandardRoute
 import org.joda.time.DateTime
 import spray.json.{DefaultJsonProtocol, RootJsonFormat}
 
+/**
+ * Trait for JSON marshalling of needed DTOs
+ */
 trait LineJsonProtocol extends DefaultJsonProtocol {
   implicit val lineFormat: RootJsonFormat[Line] = jsonFormat3(Line)
   implicit val lineDelayedFormat: RootJsonFormat[LineDelayed] = jsonFormat3(LineDelayed)
 }
 
+/**
+ * Class which holds business logic of the available endpoints.
+ */
 object LineService extends LineJsonProtocol with SprayJsonSupport {
 
   implicit val lineMarshaller: spray.json.RootJsonFormat[Line] = jsonFormat3(Line.apply)
@@ -29,6 +35,14 @@ object LineService extends LineJsonProtocol with SprayJsonSupport {
    * - Indicate if a given line is currently delayed
    */
 
+  /**
+   * Finds a vehicle for a given time and X & Y coordinates
+   *
+   * @param time Time with format `HH:MM:SS`
+   * @param x X position
+   * @param y Y position
+   * @return StandardRoute
+   */
   def findVehicleByTimeAndPosition(time: String, x: String, y: String): StandardRoute = {
     if (!time.matches(DateTimeHandler.DATE_REGEX)) {
       complete(HttpResponse(StatusCodes.BadRequest, entity = s"Time '$time' does not conform to ${DateTimeHandler.DATE_REGEX}"))
@@ -44,6 +58,12 @@ object LineService extends LineJsonProtocol with SprayJsonSupport {
     }
   }
 
+  /**
+   * Return the vehicle arriving next at a given stop
+   *
+   * @param stopId Stop object's id as context
+   * @return StandardRoute
+   */
   def findNextArrivingVehicle(stopId: Long): StandardRoute = {
     val stop: Option[Stop] = StopRepository.findById(stopId)
 
@@ -59,6 +79,12 @@ object LineService extends LineJsonProtocol with SprayJsonSupport {
     } else complete(findNextArrivingVehicle(times))
   }
 
+  /**
+   * Indicates if a given line is currently delayed
+   *
+   * @param lineId Line object's id as context
+   * @return StandardRoute
+   */
   def isVehicleDelayed(lineId: Long): StandardRoute = {
     val vehicle = LineRepository.findById(lineId)
 
@@ -66,10 +92,16 @@ object LineService extends LineJsonProtocol with SprayJsonSupport {
     else complete(HttpResponse(StatusCodes.NotFound, entity = s"No vehicle found for given id $lineId"))
   }
 
-  private def timesToVehicles(times: Set[Time]) = times.map(_.lineObj)
+  private def timesToVehicles(times: Set[Time]): Set[Line] = times.map(_.lineObj)
 
   private def actualArrival(time: Time): DateTime = time.time.plusMinutes(time.lineObj.delay)
 
+  /**
+   * Finds the next arriving vehicle by the passed set of time objects
+   *
+   * @param times Set of time objects
+   * @return Line object which arrive next
+   */
   private def findNextArrivingVehicle(times: Set[Time]): Line = {
     var closestTime: Time = null
 

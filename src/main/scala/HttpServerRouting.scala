@@ -10,6 +10,11 @@ import akka.http.scaladsl.server.Directives._
 import scala.concurrent.ExecutionContextExecutor
 import scala.io.StdIn
 
+/**
+ * Entrypoint for the application.
+ *
+ * This is the AKKA configuration, which defines the available routes, port etc.
+ */
 object HttpServerRouting {
 
   implicit val system: ActorSystem[Nothing] = ActorSystem(Behaviors.empty, "mobimeo-challenge")
@@ -18,11 +23,8 @@ object HttpServerRouting {
   implicit val executionContext: ExecutionContextExecutor = system.executionContext
 
   /**
-   * - Find a vehicle for a given time and X & Y coordinates
-   * - Return the vehicle arriving next at a given stop
-   * - Indicate if a given line is currently delayed
+   * Defines all available routes regarding vehicle fetching
    */
-
   private val vehicleGetRoutes = get {
     concat(
       path("vehicle") {
@@ -39,6 +41,9 @@ object HttpServerRouting {
     )
   }
 
+  /**
+   * Concatenates all available routes. This is useful if you have multiple server.Route defined.
+   */
   private val route = concat(vehicleGetRoutes)
 
   def main(args: Array[String]): Unit = {

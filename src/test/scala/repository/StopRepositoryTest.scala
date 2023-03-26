@@ -4,6 +4,9 @@ package repository
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
+/**
+ * Basic tests for the StopRepository
+ */
 class StopRepositoryTest {
 
   @Test
