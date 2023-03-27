@@ -5,7 +5,7 @@ This is my solution for the Mobimeo coding challenge for Software Engineer - Sca
 
 Thanks again for the opportunity to show my skills. The task was quite fun and I have learned a lot about Scala and Akka!
 
-You can start the server when you run [HttpServerRouting](src/main/scala/HttpServerRouting.scala).
+You can start the server when you run [HttpServerRouting](src/main/scala/HttpServerRouting.scala) or simply execute `sbt run`.
 ## Available endpoints
 
 --------------------------
