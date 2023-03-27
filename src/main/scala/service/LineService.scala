@@ -30,12 +30,6 @@ object LineService extends LineJsonProtocol with SprayJsonSupport {
   implicit val lineDelayedMarshaller: spray.json.RootJsonFormat[LineDelayed] = jsonFormat3(LineDelayed.apply)
 
   /**
-   * - Find a vehicle for a given time and X & Y coordinates
-   * - Return the vehicle arriving next at a given stop
-   * - Indicate if a given line is currently delayed
-   */
-
-  /**
    * Finds a vehicle for a given time and X & Y coordinates
    *
    * @param time Time with format `HH:MM:SS`
@@ -68,7 +62,7 @@ object LineService extends LineJsonProtocol with SprayJsonSupport {
     val stop: Option[Stop] = StopRepository.findById(stopId)
 
     if (stop.isEmpty) {
-      return complete(HttpResponse(StatusCodes.NotFound, entity = s"No stop found for given id $stopId)"))
+      return complete(HttpResponse(StatusCodes.NotFound, entity = s"No stop found for given id $stopId"))
     }
 
     val times = TimeRepository.findTimesByStop(stop.get)
