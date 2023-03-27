@@ -26,9 +26,9 @@ e.g. http://localhost:8081/vehicle/2/is-delayed
 Due to the given time I was not able to do everything I wanted to do.
 
 - Integrate Swagger and write a well described documentation of the webservice
+- Find better rest resource naming
 - More exception handling for edge cases
 - Write more tests
-
 - Try to optimize "db"-calls and the code in general (add more Scala sugar)
 
 ## Structure
